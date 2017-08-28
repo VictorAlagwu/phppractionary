@@ -1,14 +1,10 @@
 <?php
 
-$config = require 'config.php';
 
-require 'core/Router.php';
-require 'core/database/Connection.php';
-require 'core/database/QueryBuilder.php';
+App::bind('config', require 'config.php');
 
- /*                                                    Create an instant of PDO Connection                  
- */                                                    
+App::bind('database', new QueryBuilder(
 
-$pdo = Connection::make($config['database']);
-return $database = new QueryBuilder($pdo);
+		Connection::make(App::get('config')['database'])
 
+	));
